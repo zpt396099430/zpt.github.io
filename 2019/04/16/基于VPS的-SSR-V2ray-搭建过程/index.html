@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="本文主要记录了自己搭建出国留学工具的过程，共分为两部分：  SSR V2ray">
+<meta name="description" content="本文主要记录了自己搭建出国留学工具的过程中所用到的linux脚本，共分为三部分：  BBR加速 SSR V2ray">
 <meta name="keywords" content="VPS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于VPS的 SSR &amp;&amp; V2ray 搭建过程">
+<meta property="og:title" content="基于VPS的 SSR &amp;&amp; V2ray 搭建脚本">
 <meta property="og:url" content="http://yoursite.com/2019/04/16/基于VPS的-SSR-V2ray-搭建过程/index.html">
 <meta property="og:site_name" content="P&#39;s Blog">
-<meta property="og:description" content="本文主要记录了自己搭建出国留学工具的过程，共分为两部分：  SSR V2ray">
+<meta property="og:description" content="本文主要记录了自己搭建出国留学工具的过程中所用到的linux脚本，共分为三部分：  BBR加速 SSR V2ray">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-16T12:20:48.844Z">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/747944d4ly1g25kxu0887j20c90aqq3f.jpg">
+<meta property="og:updated_time" content="2019-04-17T06:14:51.605Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于VPS的 SSR &amp;&amp; V2ray 搭建过程">
-<meta name="twitter:description" content="本文主要记录了自己搭建出国留学工具的过程，共分为两部分：  SSR V2ray">
+<meta name="twitter:title" content="基于VPS的 SSR &amp;&amp; V2ray 搭建脚本">
+<meta name="twitter:description" content="本文主要记录了自己搭建出国留学工具的过程中所用到的linux脚本，共分为三部分：  BBR加速 SSR V2ray">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/747944d4ly1g25kxu0887j20c90aqq3f.jpg">
 
 
 
@@ -126,7 +128,7 @@
 
 
 
-  <title>基于VPS的 SSR && V2ray 搭建过程 | P's Blog</title>
+  <title>基于VPS的 SSR && V2ray 搭建脚本 | P's Blog</title>
   
 
 
@@ -280,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">基于VPS的 SSR && V2ray 搭建过程</h1>
+          <h1 class="post-title" itemprop="name headline">基于VPS的 SSR && V2ray 搭建脚本</h1>
         
 
         <div class="post-meta">
@@ -330,12 +332,19 @@
       
 
       
-        <p>本文主要记录了自己搭建出国留学工具的过程，共分为两部分：</p>
+        <p>本文主要记录了自己搭建出国留学工具的过程中所用到的linux脚本，共分为三部分：</p>
 <ul>
+<li>BBR加速</li>
 <li>SSR</li>
 <li>V2ray<a id="more"></a>
-<h2 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print hello world</span><br><span class="line">print hello world</span><br></pre></td></tr></table></figure></li>
+</li>
 </ul>
+<h2 id="BBR加速"><a href="#BBR加速" class="headerlink" title="BBR加速"></a>BBR加速</h2><h3 id="脚本一键安装-BBR-加速"><a href="#脚本一键安装-BBR-加速" class="headerlink" title="脚本一键安装 BBR 加速"></a>脚本一键安装 BBR 加速</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh &amp;&amp; chmod +x bbr.sh &amp;&amp; ./bbr.sh</span><br></pre></td></tr></table></figure>
+<h3 id="验证Google-BBR是否成功开启脚本"><a href="#验证Google-BBR是否成功开启脚本" class="headerlink" title="验证Google BBR是否成功开启脚本"></a>验证Google BBR是否成功开启脚本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sysctl net.ipv4.tcp_available_congestion_control --bbr cubic reno 或者 reno cubic bbr</span><br><span class="line">sysctl net.ipv4.tcp_congestion_control           --bbr</span><br><span class="line">sysctl net.core.default_qdisc                    --fq</span><br><span class="line">/*以上输出值返回正确说明 Google BBR 拥塞控制算法已经安装成功，注意：并不是所有的 VPS 都会有此返回值，若没有也属正常。*/</span><br></pre></td></tr></table></figure>
+<h2 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h2><h3 id="CentOS6-Debian6-Ubuntu14-ShadowsocksR一键部署管理脚本："><a href="#CentOS6-Debian6-Ubuntu14-ShadowsocksR一键部署管理脚本：" class="headerlink" title="CentOS6/Debian6/Ubuntu14 ShadowsocksR一键部署管理脚本："></a>CentOS6/Debian6/Ubuntu14 ShadowsocksR一键部署管理脚本：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install wget</span><br><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span><br></pre></td></tr></table></figure>
+<p>输入脚本后根据提示输入数字安装即可，快捷管理的命令为：<code>bash ssr.sh</code></p>
+<p><img src="https://ws2.sinaimg.cn/large/747944d4ly1g25kxu0887j20c90aqq3f.jpg" alt></p>
+<h2 id="V2Ray"><a href="#V2Ray" class="headerlink" title="V2Ray"></a>V2Ray</h2><p><a href="https://github.com/233boy/v2ray/wiki/V2Ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC" target="_blank" rel="noopener">V2Ray一键安装脚本</a></p>
 
       
     </div>
@@ -508,7 +517,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSR"><span class="nav-number">1.</span> <span class="nav-text">SSR</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BBR加速"><span class="nav-number">1.</span> <span class="nav-text">BBR加速</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本一键安装-BBR-加速"><span class="nav-number">1.1.</span> <span class="nav-text">脚本一键安装 BBR 加速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证Google-BBR是否成功开启脚本"><span class="nav-number">1.2.</span> <span class="nav-text">验证Google BBR是否成功开启脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSR"><span class="nav-number">2.</span> <span class="nav-text">SSR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CentOS6-Debian6-Ubuntu14-ShadowsocksR一键部署管理脚本："><span class="nav-number">2.1.</span> <span class="nav-text">CentOS6/Debian6/Ubuntu14 ShadowsocksR一键部署管理脚本：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V2Ray"><span class="nav-number">3.</span> <span class="nav-text">V2Ray</span></a></li></ol></div>
             
 
           </div>
