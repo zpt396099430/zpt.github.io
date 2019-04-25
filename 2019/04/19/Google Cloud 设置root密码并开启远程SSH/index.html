@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://wx4.sinaimg.cn/large/747944d4ly1g27wauu6lxj20hk04rt90.jpg">
 <meta property="og:image" content="https://wx2.sinaimg.cn/large/747944d4ly1g27wejubuhj2071049wee.jpg">
 <meta property="og:image" content="https://wx3.sinaimg.cn/large/747944d4ly1g27wfgbj5tj207p03gmx2.jpg">
-<meta property="og:updated_time" content="2019-04-19T06:05:43.922Z">
+<meta property="og:updated_time" content="2019-04-25T07:23:36.708Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Cloud 设置root密码并开启远程SSH">
 <meta name="twitter:description" content="设置root密码从Google Cloud控制台选择在浏览器窗口中打开ssh 切换到root账号1sudo -i">
@@ -380,6 +380,7 @@
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><h3 id="CentOS和Debian通用，输入以下两条命令"><a href="#CentOS和Debian通用，输入以下两条命令" class="headerlink" title="CentOS和Debian通用，输入以下两条命令"></a>CentOS和Debian通用，输入以下两条命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i 's/PermitRootLogin no/PermitRootLogin yes/g' /etc/ssh/sshd_config</span><br><span class="line">sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
 <h3 id="Ubuntu系统，输入以下两条命令"><a href="#Ubuntu系统，输入以下两条命令" class="headerlink" title="Ubuntu系统，输入以下两条命令"></a>Ubuntu系统，输入以下两条命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config</span><br><span class="line">sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
 <h3 id="重启服务器-1"><a href="#重启服务器-1" class="headerlink" title="重启服务器"></a>重启服务器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<div class="note default"><p>default </p></div>
 <p>本文转载自<a href="https://www.vediotalk.com/?p=606" target="_blank" rel="noopener">Vedio Talk - Linux</a></p>
 
       
@@ -792,6 +793,21 @@
   
 
   
+
+  
+
+  <canvas id="evanyou"></canvas>
+  <style>
+    #evanyou {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+  <script src="/js/src/evan-you.js"></script>
 
 </body>
 </html>
