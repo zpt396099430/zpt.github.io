@@ -290,6 +290,7 @@
       {% endif %}
 
       {% if is_index %}
+	  {{ live2d() }}
         {% if post.description and theme.excerpt_description %}
           {{ post.description }}
           <!--noindex-->
@@ -334,6 +335,12 @@
     {### END POST BODY ###}
     {#####################}
 
+    {% if config.post_end_tag.enabled and not is_index %}
+      <div>
+        {% include 'post-end-tag.swig' %}
+      </div>
+    {% endif %}	
+	
     {% if theme.wechat_subscriber.enabled and not is_index %}
       <div>
         {% include 'wechat-subscriber.swig' %}

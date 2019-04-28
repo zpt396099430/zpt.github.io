@@ -71,6 +71,7 @@
       {% include 'search.swig' %}
     </div>
   {% endif %}
+
 </nav>
 
 {% include '../_custom/header.swig' %}

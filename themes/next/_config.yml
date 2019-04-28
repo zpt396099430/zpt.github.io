@@ -113,8 +113,8 @@ menu_icons:
 # Schemes
 #scheme: Muse
 #scheme: Mist
-scheme: Pisces
-#scheme: Gemini
+#scheme: Pisces
+scheme: Gemini
 
 
 # ---------------------------------------------------------------
@@ -145,11 +145,12 @@ social_icons:
 
 # Blog rolls
 links_icon: link
-links_title: Links
-links_layout: block
-#links_layout: inline
-#links:
-  #Title: http://example.com/
+links_title: 友情链接
+#links_layout: block
+links_layout: inline
+links:
+  博丽书屋: http://mark.mudzuki.cn/
+  Marchen : https://marchen-y.github.io/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
@@ -169,7 +170,7 @@ toc:
 # Creative Commons 4.0 International License.
 # http://creativecommons.org/
 # Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
-#creative_commons: by-nc-sa
+creative_commons: by-nc-sa
 #creative_commons:
 
 sidebar:
@@ -249,7 +250,7 @@ post_wordcount:
 
 # Declare license on posts
 post_copyright:
-  enable: false
+  enable: true
   license: CC BY-NC-SA 3.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/
 
@@ -381,12 +382,18 @@ valine:
   enable: false
   appid:  # your leancloud application appid
   appkey:  # your leancloud application appkey
-  notify: false # mail notifier , https://github.com/xCss/Valine/wiki
-  verify: false # Verification code
-  placeholder: Just go go # comment box placeholder
-  avatar: mm # gravatar style
-  guest_info: nick,mail,link # custom comment header
-  pageSize: 10 # pagination size
+  notify: false 
+  # mail notifier , https://github.com/xCss/Valine/wiki
+  verify: false 
+  # Verification code
+  placeholder: Just go go 
+  # comment box placeholder
+  avatar: mm 
+  # gravatar style
+  guest_info: nick,mail,link 
+  # custom comment header
+  pageSize: 10 
+  # pagination size
 
 
 # Support for youyan comments system.
@@ -402,10 +409,14 @@ valine:
 # You can get your Github ID from https://api.github.com/users/<Github username>
 gitment:
   enable: false
-  mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
-  count: true # Show comments count in post meta area
-  lazy: false # Comments lazy loading with a button
-  cleanly: false # Hide 'Powered by ...' on footer, and more
+  mint: true 
+  # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
+  count: true 
+  # Show comments count in post meta area
+  lazy: false 
+  # Comments lazy loading with a button
+  cleanly: false 
+  # Hide 'Powered by ...' on footer, and more
   language: # Force language, or auto switch by theme
   github_user: # MUST HAVE, Your Github ID
   github_repo: # MUST HAVE, The repo you use to store Gitment comments
@@ -803,6 +814,8 @@ vendors:
   # https://github.com/revir/need-more-share2
   needMoreShare2:
 
+# colorful trilateral riband background
+evanyou: true
 
 # Assets
 css: css

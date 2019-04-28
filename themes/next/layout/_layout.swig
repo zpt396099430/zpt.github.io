@@ -89,5 +89,6 @@
   {% include '_third-party/rating.swig' %}
   {% include '_third-party/mathjax.swig' %}
   {% include '_third-party/scroll-cookie.swig' %}
+  {% include '_custom/custom.swig' %}
 </body>
 </html>

@@ -10,7 +10,7 @@ categories: 教程
 
 # 设置root密码
 ## 从Google Cloud控制台选择在浏览器窗口中打开ssh
-![image](https://ws3.sinaimg.cn/large/747944d4ly1g27w8coanoj20qh086t95.jpg)
+![image](https://wx2.sinaimg.cn/large/747944d4ly1g2giwhl2ffj20qh086js1.jpg)
 
 ## 切换到root账号
 ```shell
@@ -66,5 +66,8 @@ sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_
 ```shell
 reboot
 ```
+
+{% note default %} default {% endnote %}
+
 
 本文转载自[Vedio Talk - Linux](https://www.vediotalk.com/?p=606)
