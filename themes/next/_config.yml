@@ -325,8 +325,8 @@ post_meta:
   item_text: true
   created_at: true
   updated_at:
-    enable: true
-    another_day: true
+    enable: false
+    another_day: false
   categories: true
 
 # Post wordcount display settings
@@ -340,7 +340,7 @@ symbols_count_time:
 
 codeblock:
   # Manual define the border radius in codeblock, leave it blank for the default value: 1
-  border_radius:
+  border_radius: 
   # Add copy button on codeblock
   copy_button:
     enable: false
