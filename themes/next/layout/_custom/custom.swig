@@ -1,5 +1,4 @@
 {# 随机三角丝带背景 #}
-{% if theme.evanyou %}
   <canvas id="evanyou"></canvas>
   <style>
     #evanyou {
@@ -11,5 +10,8 @@
       z-index: -1;
     }
   </style>
-  <script src="/js/src/evan-you.js"></script>
-{% endif %}
+  <script src="/js/cursor/evan-you.js"></script>
+
+
+{# 鼠标点击特效 #}
+ <script async src="js/cursor/love.min.js"></script>
