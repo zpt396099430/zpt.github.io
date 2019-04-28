@@ -10,7 +10,7 @@ categories: 教程
 
 # 设置root密码
 ## 从Google Cloud控制台选择在浏览器窗口中打开ssh
-![image](https://wx2.sinaimg.cn/large/747944d4ly1g2giwhl2ffj20qh086js1.jpg)
+![控制台.jpg](https://i.loli.net/2019/04/28/5cc50fa42f3c9.jpg)
 
 ## 切换到root账号
 ```shell
@@ -23,7 +23,7 @@ passwd
 ```
 然后会要求输入新密码，然后再重复一次密码，输入密码的时候不会显示出来，所以直接输入密码，然后回车，再然后重复输入密码回车
 
-![image](https://wx4.sinaimg.cn/large/747944d4ly1g27wauu6lxj20hk04rt90.jpg)
+![截图1.jpg](https://i.loli.net/2019/04/28/5cc51077c77f3.jpg)
 
 # 开启SSH权限
 ## 方法一
@@ -40,12 +40,12 @@ i
 PermitRootLogin yes           //默认为no，需要开启root用户访问改为yes
 PasswordAuthentication yes    //默认为no，改为yes开启密码登陆
 ```
-![image](https://wx2.sinaimg.cn/large/747944d4ly1g27wejubuhj2071049wee.jpg)
+![截图2.jpg](https://i.loli.net/2019/04/28/5cc510779ac88.jpg)
 ### 修改完成后，再下按 esc 键，然后再输入:wq
 ```shell
 :wq
 ```
-![image](https://wx3.sinaimg.cn/large/747944d4ly1g27wfgbj5tj207p03gmx2.jpg)
+![截图3.jpg](https://i.loli.net/2019/04/28/5cc51077ac879.jpg)
 ### 重启服务器
 ```shell
 reboot
@@ -66,8 +66,6 @@ sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_
 ```shell
 reboot
 ```
-
-{% note default %} default {% endnote %}
 
 
 本文转载自[Vedio Talk - Linux](https://www.vediotalk.com/?p=606)
