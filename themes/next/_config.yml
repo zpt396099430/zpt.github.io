@@ -93,7 +93,7 @@ footer:
 # Valid values of language: deed.zh, deed.fr, deed.de, etc.
 creative_commons:
   license: by-nc-sa
-  sidebar: true
+  sidebar: false
   post: true
   language: deed.zh
 
@@ -231,11 +231,11 @@ avatar:
   # You can also use other linking images.
   url: /images/touxiang.jpeg
   # If true, the avatar would be dispalyed in circle.
-  rounded: false
+  rounded: true
   # The value of opacity should be choose from 0 to 1 to set the opacity of the avatar.
   opacity: 1
   # If true, the avatar would be rotated with the cursor.
-  rotated: false
+  rotated: true
 
 # Table Of Contents in the Sidebar
 toc:
@@ -343,9 +343,9 @@ codeblock:
   border_radius:
   # Add copy button on codeblock
   copy_button:
-    enable: false
+    enable: true
     # Show text copy result
-    show_result: false
+    show_result: true
     # Style: only 'flat' is currently available, leave it blank if you prefer default theme
     style:
 
@@ -1218,6 +1218,12 @@ vendors:
   # disqusjs_css: //cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css
   disqusjs_js:
   disqusjs_css:
+
+# mouse click effect: fireworks | explosion | love | text
+cursor_effect: love
+
+# colorful trilateral riband background
+evanyou: true
 
 # Assets
 css: css

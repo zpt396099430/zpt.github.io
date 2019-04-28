@@ -13,7 +13,6 @@
   {% if theme.reading_progress.enable && not is_index %}
     <div class="reading-progress-bar"></div>
   {% endif %}
-
   <article class="{{ post_class }}" itemscope itemtype="http://schema.org/Article">
   {##################}
   {### POST BLOCK ###}
