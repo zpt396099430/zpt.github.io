@@ -12,6 +12,7 @@
   bottom: unset;
   transition: all .5s ease-in-out;
   background: url("/images/scroll.png");
+  opacity: 1.0;
 
   //隐藏箭头图标
   > i {
@@ -20,7 +21,7 @@
 
   &.back-to-top-on {
     bottom: unset;
-    top: 100vh < (900px + 200px) ? calc( 100vh - 1100px - 200px ) : 0px;
+    top: 100vh < 900px ? calc( 100vh - 900px - 30% ) : 0px;
   }
 }
 
