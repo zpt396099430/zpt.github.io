@@ -1742,6 +1742,15 @@ pre .javascript .function {
   border: 1px solid #eee;
   opacity: 1;
 }
+.site-author-image {
+  border-radius: 100%;
+}
+.site-author-image {
+  transition: transform 1s ease-out;
+}
+.site-author-image:hover {
+  transform: rotateZ(360deg);
+}
 .site-author-name {
   margin: 0;
   text-align: center;
@@ -1753,21 +1762,6 @@ pre .javascript .function {
   text-align: center;
   font-size: 13px;
   color: #999;
-}
-.site-author-image {
-  display: block;
-  margin: 0 auto;
-  padding: 2px;
-  max-width: 120px;
-  height: auto;
-  border: 1px solid #eee;
-/* start*/
-  border-radius: 60%;
-  transition: 1s all;
-}
-.site-author-image:hover {
-  background-color: #55dae1;
-  transform: rotate(360deg);
 }
 .links-of-author {
   margin-top: 20px;
@@ -1790,7 +1784,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #4fa1df;
+  background: #ff226b;
 }
 .feed-link,
 .chat {
