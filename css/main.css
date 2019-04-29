@@ -1784,7 +1784,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff226b;
+  background: #9fff2a;
 }
 .feed-link,
 .chat {
@@ -2897,13 +2897,14 @@ ul.breadcrumb li+li:last-child {
 }
 .post-body h3 {
   font-size: 1.3em;
-  border-bottom: 1px dotted #eee;
+  border-bottom: 1px solid #eee;
 }
 .post-body h3 code {
   font-size: 1em;
 }
 .post-body h4 {
   font-size: 1.2em;
+  border-bottom: 1px dotted #eee;
 }
 .post-body h4 code {
   font-size: 1em;
@@ -2987,11 +2988,12 @@ ul.breadcrumb li+li:last-child {
   bottom: unset;
   transition: all 0.5s ease-in-out;
   background: url("/images/scroll.png");
+  opacity: 1;
 }
 .back-to-top > i {
   display: none;
 }
 .back-to-top.back-to-top-on {
   bottom: unset;
-  top: calc(100vh - 900px - 200px);
+  top: calc(100vh - 900px - 30%);
 }
