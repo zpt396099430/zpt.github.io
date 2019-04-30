@@ -108,7 +108,7 @@
 <meta property="og:site_name" content="ZPT&#39;s Blog">
 <meta property="og:description" content="前言其实很久以前就有想法想要搭一个属于自己的博客，但是由于种种不可抗拒之力其实就是懒，最终才拖到现在才成功搭建起了自己的博客网站。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-30T01:13:08.170Z">
+<meta property="og:updated_time" content="2019-04-30T06:34:17.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo个人博客：基础建站">
 <meta name="twitter:description" content="前言其实很久以前就有想法想要搭一个属于自己的博客，但是由于种种不可抗拒之力其实就是懒，最终才拖到现在才成功搭建起了自己的博客网站。">
@@ -468,7 +468,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">270</span>
+                <span title="本文字数">1.2k</span>
               
 
               
@@ -493,13 +493,30 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>其实很久以前就有想法想要搭一个属于自己的博客，但是由于种种不可抗拒之力<del>其实就是懒</del>，最终才拖到现在才成功搭建起了自己的博客网站。<br><a id="more"></a><br>一开始选择了在vultr上购买了vps并安装了wordpress，但是wordpress实在是太过臃肿，相比而言hexo更加回归写作本身，所以最终我还是选择了hexo。一方面是由于hexo更纯粹，另一方面也是由于hexo的搭建需要借助github，借此正可以熟悉一下git的应用。<br>博客不在美，而在于勤。<br>望与诸君共勉。</p>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ol>
+<li>域名访问以后出现403错误</li>
+<li>Hexo中使用外链形式添加的图片无法被加载  </li>
+</ol>
 <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
 <li>Github账号一枚</li>
 <li>VPS服务器</li>
 <li>Git</li>
 <li>Node.js</li>
 <li>Xshell6  </li>
+<li>域名（需要实名备案）  </li>
 </ol>
+<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><h3 id="Git和Node-js的安装"><a href="#Git和Node-js的安装" class="headerlink" title="Git和Node.js的安装"></a>Git和Node.js的安装</h3><p><a href="https://www.git-scm.com/download/" target="_blank" rel="noopener">Git</a><br>安装完成后执行<code>git version</code>命令查看版本信息，若显示则安装成功<br>安装完成后执行一些初始化操作，打开Git Bash设置用户名和邮箱<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name <span class="string">"用户名"</span></span><br><span class="line">git<span class="built_in"> config </span>--global user.email <span class="string">"邮箱地址"</span></span><br></pre></td></tr></table></figure></p>
+<p> 设置SSH Key，Git Bash内执行：<code>ssh-keygen -t rsa -C &quot;邮箱地址&quot;</code>根据提示输入密码等完成设置。<br> 查看公开密钥：<code>cat ~/.ssh/id_rsa.pub</code>复制显示的内容，待会有用。<br><a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js</a><br>安装完成后执行<code>node version</code>命令查看版本信息，若显示则安装成功</p>
+<h3 id="本地Hexo博客搭建"><a href="#本地Hexo博客搭建" class="headerlink" title="本地Hexo博客搭建"></a>本地Hexo博客搭建</h3><h4 id="使用npm安装hexo"><a href="#使用npm安装hexo" class="headerlink" title="使用npm安装hexo"></a>使用npm安装hexo</h4><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
+<p> 安装完成后在本地新建目录hexo(或任意名字自己决定)，例如D:\Blog，在此根目录下执行<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">npm <span class="keyword">install</span></span><br></pre></td></tr></table></figure></p>
+<p> 执行完成后，可在根目录下执行<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s -p 4000</code><br> 然在浏览器url中输入 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 就可以看到你的个人博客了（端口如被占用可换成其他端口，如5000）。<br>至此，本地Hexo博客搭建完成。</p>
+<h3 id="Git-Hooks自动部署"><a href="#Git-Hooks自动部署" class="headerlink" title="Git Hooks自动部署"></a>Git Hooks自动部署</h3><h4 id="部署原理"><a href="#部署原理" class="headerlink" title="部署原理"></a>部署原理</h4><blockquote>
+<p>通过在本地编辑文本，然后使用Git远程部署到VPS的Git仓库。hexo d命令实际上只deploy了本地的public文件夹，Git Hooks实际上就是当Git仓库收到最新的push时，将Git仓库接受到的内容复制到VPS上的网站目录内。相当于完成了手动将public文件夹复制到VPS的网站根目录里。</p>
+</blockquote>
+<h4 id="VPS操作"><a href="#VPS操作" class="headerlink" title="VPS操作"></a>VPS操作</h4><ul>
+<li>安装Git<br>首先需要同本地一样安装Git，过程略。</li>
+<li>创建Git用户<br>执行：<code>adduser git</code>，根据提示设置密码。</li>
+</ul>
 
       
     </div>
@@ -737,7 +754,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">2.</span> <span class="nav-text">遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">3.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程"><span class="nav-number">4.</span> <span class="nav-text">搭建过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git和Node-js的安装"><span class="nav-number">4.1.</span> <span class="nav-text">Git和Node.js的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地Hexo博客搭建"><span class="nav-number">4.2.</span> <span class="nav-text">本地Hexo博客搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用npm安装hexo"><span class="nav-number">4.2.1.</span> <span class="nav-text">使用npm安装hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Hooks自动部署"><span class="nav-number">4.3.</span> <span class="nav-text">Git Hooks自动部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#部署原理"><span class="nav-number">4.3.1.</span> <span class="nav-text">部署原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VPS操作"><span class="nav-number">4.3.2.</span> <span class="nav-text">VPS操作</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -772,7 +789,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">2k</span>
+    <span title="站点总字数">3k</span>
   
 
   
