@@ -108,10 +108,14 @@
 <meta property="og:site_name" content="ZPT&#39;s Blog">
 <meta property="og:description" content="前言其实很久以前就有想法想要搭一个属于自己的博客，但是由于种种不可抗拒之力其实就是懒，最终才拖到现在才成功搭建起了自己的博客网站。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-30T06:34:17.470Z">
+<meta property="og:image" content="https://i.loli.net/2019/05/15/5cdbfaa45905728938.png">
+<meta property="og:image" content="https://i.loli.net/2019/05/15/5cdbfeef7949750207.png">
+<meta property="og:image" content="https://i.loli.net/2019/05/15/5cdbfeef972e226206.png">
+<meta property="og:updated_time" content="2019-05-15T11:58:51.676Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo个人博客：基础建站">
 <meta name="twitter:description" content="前言其实很久以前就有想法想要搭一个属于自己的博客，但是由于种种不可抗拒之力其实就是懒，最终才拖到现在才成功搭建起了自己的博客网站。">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/15/5cdbfaa45905728938.png">
 
 
 
@@ -468,7 +472,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.2k</span>
+                <span title="本文字数">4.1k</span>
               
 
               
@@ -516,6 +520,54 @@
 <h4 id="VPS操作"><a href="#VPS操作" class="headerlink" title="VPS操作"></a>VPS操作</h4><ul>
 <li>安装Git<br>首先需要同本地一样安装Git，过程略。</li>
 <li>创建Git用户<br>执行：<code>adduser git</code>，根据提示设置密码。</li>
+<li><p>赋予git用户sudo权限<br>执行：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod <span class="number">740</span> <span class="regexp">/etc/</span>sudoers</span><br><span class="line">vim <span class="regexp">/etc/</span>sudoers</span><br></pre></td></tr></table></figure>
+<p>找到以下内容：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># User privilege specification</span></span><br><span class="line"><span class="attribute">root</span>    <span class="literal">ALL</span>=(<span class="literal">ALL</span>:<span class="literal">ALL</span>) <span class="literal">ALL</span></span><br></pre></td></tr></table></figure>
+<p>在<code>root ALL=(ALL:ALL) ALL</code>这一行下面添加<code>git ALL=(ALL:ALL) ALL</code><br><code>wq:</code>保存退出后，修改回文件权限<code>chmod 440 /etc/sudoers</code>  </p>
+</li>
+<li><p>初始化git仓库<br>切换到git用户<code>su git</code>然后：  </p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">cd</span> <span class="string">/home/git</span>                <span class="string">//</span>切换到git用户目录</span><br><span class="line">mkdir blog.git              <span class="string">//</span>创建git仓库文件夹，以blog.git为例</span><br><span class="line"><span class="keyword">cd</span> blog.git             <span class="string">//</span>进入仓库目录</span><br><span class="line">git init <span class="params">--bare</span>             <span class="string">//</span>使用<span class="params">--bare</span>参数初始化为裸仓库，这样创建的仓库不包含工作区</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建网站目录</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> /<span class="keyword">var</span>/www/                <span class="comment">//切换目录</span></span><br><span class="line"><span class="keyword">mkdir</span> blog              <span class="comment">//创建网站目录，以blog为例</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置SSH</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/home/git</span>                <span class="string">//</span>切换到git用户目录</span><br><span class="line">mkdir <span class="string">.ssh</span>              <span class="string">//</span>创建<span class="string">.ssh</span>目录</span><br><span class="line"><span class="keyword">cd</span> <span class="string">.ssh</span></span><br><span class="line">vim authorized_keys</span><br></pre></td></tr></table></figure>
+<p>然后将本地的公钥复制到authorized_keys文件里(公钥即上文中本地执行cat ~/.ssh/id_rsa.pub查看的内容)</p>
+</li>
+<li><p>用户组管理<br>执行：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ll <span class="regexp">/home/git/</span></span><br><span class="line">ll <span class="regexp">/var/www/</span></span><br></pre></td></tr></table></figure>
+<p>确保blog.git、.ssh、blog目录的用户组权限为git:git<br><img src="https://i.loli.net/2019/05/15/5cdbfaa45905728938.png" alt><br>若不是，执行下列命令后再查看：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chown <span class="string">git:</span>git -R <span class="regexp">/var/</span>www/blog</span><br><span class="line">sudo chown <span class="string">git:</span>git -R <span class="regexp">/home/</span>git/blog.git</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="安装配置nginx"><a href="#安装配置nginx" class="headerlink" title="安装配置nginx"></a>安装配置nginx</h4><ul>
+<li>安装nginx<br>执行：<code>apt-get install nginx</code>，若输入<code>nginx -V</code>可以看到nginx版本信息，则安装成功。</li>
+<li><p>配置nginx<br>执行：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/nginx/sites-<span class="built_in">available</span>               <span class="comment">//切换目录</span></span><br><span class="line">cp <span class="built_in">default</span> <span class="built_in">default</span>.bak                  <span class="comment">//备份默认配置</span></span><br><span class="line">vim <span class="built_in">default</span>                     <span class="comment">//修改配置</span></span><br></pre></td></tr></table></figure>
+<p>参靠我的本人配置文件内容：</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80 default;              <span class="comment">//默认监听80端口</span></span><br><span class="line">    root /<span class="keyword">var</span>/www/blog;             <span class="comment">//网站根目录</span></span><br><span class="line">    server_name leihungjyu.com www.leihungjyu.com;  <span class="comment">//网址</span></span><br><span class="line">    access_log  /<span class="keyword">var</span>/<span class="keyword">log</span>/nginx/blog_access.<span class="keyword">log</span>;</span><br><span class="line">    error_log   /<span class="keyword">var</span>/<span class="keyword">log</span>/nginx/blog_error.<span class="keyword">log</span>;</span><br><span class="line">    error_page 404 =  /404.html;</span><br><span class="line"></span><br><span class="line">    location ~* ^.+\.(ico|gif|jpg|jpeg|png)$ &#123;</span><br><span class="line">        root /<span class="keyword">var</span>/www/blog;</span><br><span class="line">        access_log   off;</span><br><span class="line">        expires      1d;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~* ^.+\.(css|js|txt|xml|swf|wav)$ &#123;</span><br><span class="line">        root /<span class="keyword">var</span>/www/blog;</span><br><span class="line">        access_log   off;</span><br><span class="line">        expires      10m;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root /<span class="keyword">var</span>/www/blog;</span><br><span class="line">        <span class="keyword">if</span> (-f <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">        rewrite ^/(.*)$  /<span class="variable">$1</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location /nginx_status &#123;</span><br><span class="line">        stub_status <span class="keyword">on</span>;</span><br><span class="line">        access_log off;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>保存退出后，启动<code>nginx：systemctl start nginx</code><br>设置开机自动启动：<code>systemctl enable nginx</code><br>查看运行状态：<code>systemctl status nginx</code>,显示<code>running</code>表示成功运行。<br><img src="https://i.loli.net/2019/05/15/5cdbfeef7949750207.png" alt>  </p>
+</li>
+</ul>
+<h4 id="配置Git-Hooks"><a href="#配置Git-Hooks" class="headerlink" title="配置Git Hooks"></a>配置Git Hooks</h4><ul>
+<li><p>创建post-receive文件<br>git用户下执行：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/home/gi</span>t<span class="regexp">/blog.git/</span>hooks     <span class="regexp">//</span>切换到hooks目录下</span><br><span class="line">vim post-receive            <span class="regexp">//</span>创建文件</span><br></pre></td></tr></table></figure>
+<p>复制下面的内容到post-receive文件中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">GIT_REPO=/home/git/blog.git</span><br><span class="line">TMP_GIT_CLONE=/tmp/blog</span><br><span class="line">PUBLIC_WWW=/var/www/blog</span><br><span class="line">rm -rf <span class="variable">$&#123;TMP_GIT_CLONE&#125;</span></span><br><span class="line">git <span class="built_in">clone</span> <span class="variable">$GIT_REPO</span> <span class="variable">$TMP_GIT_CLONE</span></span><br><span class="line">rm -rf <span class="variable">$&#123;PUBLIC_WWW&#125;</span>/*</span><br><span class="line">cp -rf <span class="variable">$&#123;TMP_GIT_CLONE&#125;</span>/* <span class="variable">$&#123;PUBLIC_WWW&#125;</span></span><br></pre></td></tr></table></figure>
+<p>保存退出后，执行：chmod +x post-receive赋予可执行权限。  </p>
+</li>
+</ul>
+<h4 id="本地操作"><a href="#本地操作" class="headerlink" title="本地操作"></a>本地操作</h4><ul>
+<li>尝试连接<br>在本地打开Git Bash：<code>ssh git@VPS的ip</code><br><img src="https://i.loli.net/2019/05/15/5cdbfeef972e226206.png" alt><br>如图所示则连接成功，若默认端口不是22，则需要在后面加上-p 端口号，或者在.ssh文件夹下创建一个config文件，内容如下：<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> Host 服务器IP</span><br><span class="line">HostName 服务器IP</span><br><span class="line">User git</span><br><span class="line">Port 端口号</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>配置Hexo<br>打开本地博客根目录下的_config.yml文件，找到最后的deploy配置，修改为：</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># Deployment</span></span><br><span class="line"><span class="meta">## Docs: https:<span class="comment">//hexo.io/docs/deployment.html</span></span></span><br><span class="line"><span class="symbol">deploy:</span></span><br><span class="line"><span class="symbol">    type:</span> git</span><br><span class="line"><span class="symbol">    repo:</span> git@VPS的IP:blog.git</span><br><span class="line"><span class="symbol">    branch:</span> master</span><br></pre></td></tr></table></figure>
+<p>到此，Hexo建站就全部配置部署完毕了。</p>
+</li>
 </ul>
 
       
@@ -754,7 +806,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">2.</span> <span class="nav-text">遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">3.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程"><span class="nav-number">4.</span> <span class="nav-text">搭建过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git和Node-js的安装"><span class="nav-number">4.1.</span> <span class="nav-text">Git和Node.js的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地Hexo博客搭建"><span class="nav-number">4.2.</span> <span class="nav-text">本地Hexo博客搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用npm安装hexo"><span class="nav-number">4.2.1.</span> <span class="nav-text">使用npm安装hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Hooks自动部署"><span class="nav-number">4.3.</span> <span class="nav-text">Git Hooks自动部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#部署原理"><span class="nav-number">4.3.1.</span> <span class="nav-text">部署原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VPS操作"><span class="nav-number">4.3.2.</span> <span class="nav-text">VPS操作</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">2.</span> <span class="nav-text">遇到的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">3.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程"><span class="nav-number">4.</span> <span class="nav-text">搭建过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git和Node-js的安装"><span class="nav-number">4.1.</span> <span class="nav-text">Git和Node.js的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地Hexo博客搭建"><span class="nav-number">4.2.</span> <span class="nav-text">本地Hexo博客搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用npm安装hexo"><span class="nav-number">4.2.1.</span> <span class="nav-text">使用npm安装hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git-Hooks自动部署"><span class="nav-number">4.3.</span> <span class="nav-text">Git Hooks自动部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#部署原理"><span class="nav-number">4.3.1.</span> <span class="nav-text">部署原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VPS操作"><span class="nav-number">4.3.2.</span> <span class="nav-text">VPS操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装配置nginx"><span class="nav-number">4.3.3.</span> <span class="nav-text">安装配置nginx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Git-Hooks"><span class="nav-number">4.3.4.</span> <span class="nav-text">配置Git Hooks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地操作"><span class="nav-number">4.3.5.</span> <span class="nav-text">本地操作</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -789,7 +841,7 @@
     
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">3k</span>
+    <span title="站点总字数">6k</span>
   
 
   
