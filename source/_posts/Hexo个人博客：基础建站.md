@@ -63,8 +63,147 @@ npm install
 首先需要同本地一样安装Git，过程略。
 - 创建Git用户  
 执行：`adduser git`，根据提示设置密码。
+- 赋予git用户sudo权限  
+执行：
+```
+chmod 740 /etc/sudoers
+vim /etc/sudoers
+```
+ 找到以下内容：
+```
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+```
+ 在`root ALL=(ALL:ALL) ALL`这一行下面添加`git ALL=(ALL:ALL) ALL`  
+ `wq:`保存退出后，修改回文件权限`chmod 440 /etc/sudoers`  
+- 初始化git仓库  
+ 切换到git用户`su git`然后：  
+ ```
+ cd /home/git                //切换到git用户目录
+mkdir blog.git              //创建git仓库文件夹，以blog.git为例
+cd blog.git             //进入仓库目录
+git init --bare             //使用--bare参数初始化为裸仓库，这样创建的仓库不包含工作区
+```
+- 创建网站目录
+```
+cd /var/www/                //切换目录
+mkdir blog              //创建网站目录，以blog为例
+```
+- 配置SSH
+```
+cd /home/git                //切换到git用户目录
+mkdir .ssh              //创建.ssh目录
+cd .ssh
+vim authorized_keys
+```
+ 然后将本地的公钥复制到authorized_keys文件里(公钥即上文中本地执行cat ~/.ssh/id_rsa.pub查看的内容)
+- 用户组管理
+执行：
+```
+ll /home/git/
+ll /var/www/
+```
+ 确保blog.git、.ssh、blog目录的用户组权限为git:git  
+![](https://i.loli.net/2019/05/15/5cdbfaa45905728938.png)  
+若不是，执行下列命令后再查看：
+```
+sudo chown git:git -R /var/www/blog
+sudo chown git:git -R /home/git/blog.git
+```
 
+#### 安装配置nginx
+- 安装nginx  
+执行：`apt-get install nginx`，若输入`nginx -V`可以看到nginx版本信息，则安装成功。
+- 配置nginx  
+执行：
+```
+cd /etc/nginx/sites-available               //切换目录
+cp default default.bak                  //备份默认配置
+vim default                     //修改配置
+```
+ 参靠我的本人配置文件内容：
+```
+server {
+    listen 80 default;              //默认监听80端口
+    root /var/www/blog;             //网站根目录
+    server_name leihungjyu.com www.leihungjyu.com;  //网址
+    access_log  /var/log/nginx/blog_access.log;
+    error_log   /var/log/nginx/blog_error.log;
+    error_page 404 =  /404.html;
 
+    location ~* ^.+\.(ico|gif|jpg|jpeg|png)$ {
+        root /var/www/blog;
+        access_log   off;
+        expires      1d;
+    }
+
+    location ~* ^.+\.(css|js|txt|xml|swf|wav)$ {
+        root /var/www/blog;
+        access_log   off;
+        expires      10m;
+    }
+
+    location / {
+        root /var/www/blog;
+        if (-f $request_filename) {
+        rewrite ^/(.*)$  /$1 break;
+        }
+    }
+
+    location /nginx_status {
+        stub_status on;
+        access_log off;
+    }
+}
+```
+ 保存退出后，启动`nginx：systemctl start nginx`  
+ 设置开机自动启动：`systemctl enable nginx`  
+ 查看运行状态：`systemctl status nginx`,显示`running`表示成功运行。  
+ ![](https://i.loli.net/2019/05/15/5cdbfeef7949750207.png)  
+ 
+#### 配置Git Hooks
+ - 创建post-receive文件  
+ git用户下执行：
+ ```
+ cd /home/git/blog.git/hooks     //切换到hooks目录下
+ vim post-receive            //创建文件
+ ```
+   复制下面的内容到post-receive文件中：
+ ```
+ #!/bin/bash
+ GIT_REPO=/home/git/blog.git
+ TMP_GIT_CLONE=/tmp/blog
+ PUBLIC_WWW=/var/www/blog
+ rm -rf ${TMP_GIT_CLONE}
+ git clone $GIT_REPO $TMP_GIT_CLONE
+ rm -rf ${PUBLIC_WWW}/*
+ cp -rf ${TMP_GIT_CLONE}/* ${PUBLIC_WWW}
+ ```
+   保存退出后，执行：chmod +x post-receive赋予可执行权限。  
+   
+#### 本地操作
+ - 尝试连接  
+ 在本地打开Git Bash：`ssh git@VPS的ip`
+ ![](https://i.loli.net/2019/05/15/5cdbfeef972e226206.png)  
+ 如图所示则连接成功，若默认端口不是22，则需要在后面加上-p 端口号，或者在.ssh文件夹下创建一个config文件，内容如下：
+ ```
+ Host 服务器IP
+HostName 服务器IP
+User git
+Port 端口号
+IdentityFile ~/.ssh/id_rsa
+```
+- 配置Hexo  
+打开本地博客根目录下的_config.yml文件，找到最后的deploy配置，修改为：
+```
+# Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+    type: git
+    repo: git@VPS的IP:blog.git
+    branch: master
+```
+ 到此，Hexo建站就全部配置部署完毕了。
 
 
 
