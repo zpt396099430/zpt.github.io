@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.zhangpeitian.cn/2019/04/19/Google%20Cloud%20%E8%AE%BE%E7%BD%AEroot%E5%AF%86%E7%A0%81%E5%B9%B6%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8BSSH/</loc>
+    
+    <lastmod>2019-06-04T11:12:30.145Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.zhangpeitian.cn/2019/04/12/Hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%9A%E5%9F%BA%E7%A1%80%E5%BB%BA%E7%AB%99/</loc>
     
     <lastmod>2019-05-15T11:58:51.676Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://blog.zhangpeitian.cn/resources/index.html</loc>
     
     <lastmod>2019-05-05T01:32:58.010Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.zhangpeitian.cn/2019/04/19/Google%20Cloud%20%E8%AE%BE%E7%BD%AEroot%E5%AF%86%E7%A0%81%E5%B9%B6%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8BSSH/</loc>
-    
-    <lastmod>2019-04-28T02:31:58.862Z</lastmod>
     
   </url>
   
