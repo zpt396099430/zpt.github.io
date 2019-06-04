@@ -66,6 +66,30 @@ sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_
 ```shell
 reboot
 ```
-
+# 修改默认SSH端口
+## 修改/etc/ssh/sshd_config
+使用`vi /etc/ssh/sshd_config`编辑配置文件
+```
+#Port 22         //这行去掉#号，防止配置不好以后不能远程登录，还得去机房修改，等修改以后的端口能使用以后在注释掉
+Port 33378      //下面添加这一行
+```
+## 修改firewall配置(如果没有开启，则忽略)
+firewall添加想要修改的ssh端口：
+```
+添加到防火墙：
+firewall-cmd --zone=public --add-port=33378/tcp --permanent (permanent是保存配置，不然下次重启以后这次修改无效)
+重启：
+firewall-cmd --reload
+查看添加端口是否成功，如果添加成功则会显示yes，否则no
+firewall-cmd --zone=public --query-port=33378/tcp
+```
+## 修改SELinux
+使用命令`semanage port -l | grep ssh`查看当前SElinux 允许的ssh端口
+使用命令`semanage port -a -t ssh_port_t -p tcp 33378`添加33378端口到 SELinux
+使用命令`semanage port -l | grep ssh`确认是否添加成功
+如果成功会输出`ssh_port_t                tcp    33378, 22`
+重启SSH服务`systemctl restart sshd.service`  
+## 测试新端口的ssh连接
+测试修改端口以后的ssh连接，如果成功则将step1里面的port 22 重新注释掉
 
 本文转载自[Vedio Talk - Linux](https://www.vediotalk.com/?p=606)
